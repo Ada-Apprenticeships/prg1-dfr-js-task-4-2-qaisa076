@@ -9,6 +9,14 @@ function validNumber(value) {
 }
 
 function dataDimensions(dataframe) {
+  if (!dataframe || (Array.isArray(dataframe) && dataframe.length === 0)) {
+    return [-1, -1]; 
+  }
+
+  const rows = Array.isArray(dataframe) ? dataframe.length : -1;
+  const cols = rows > 0 && Array.isArray(dataframe[0]) ? dataframe[0].length : -1;
+
+return [rows, cols];
 }
 
 function findTotal(dataset) {
