@@ -82,11 +82,21 @@ function calculateMedian(dataset) {
 }
 
 function convertToNumber(dataframe, col) {
+  let convertedCount = 0;
 
+  for (let i = 1; i < dataframe.length; i++) { 
+      const value = dataframe[i][col];
+
+      if (typeof value === 'string' && !isNaN(value) && value.trim() !== '') {
+          dataframe[i][col] = parseFloat(value);
+          convertedCount++;
+      } else if (typeof value === 'number') {
+          continue;
+      }
+  }
+  return convertedCount;
 }
-
 function flatten(dataframe) {
-
 }
 
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
