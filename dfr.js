@@ -49,11 +49,36 @@ function calculateMean(dataset) {
     }
   }
   return count > 0 ? total / count : 0;
-
 }
 
 function calculateMedian(dataset) {
+  if (!Array.isArray(dataset)) {
+    return 0;
+  }
+  var validNumbers = [];
 
+  for (var i = 0; i < dataset.length; i++) {
+    var num = Number(dataset[i]);
+    if (!isNaN(num)) { 
+        validNumbers.push(num); 
+    }
+  }
+
+  if (validNumbers.length === 0) {
+    return 0;
+  }
+
+  validNumbers.sort(function(a, b) {
+    return a - b;
+  });
+
+  var mid = Math.floor(validNumbers.length / 2);
+
+  if (validNumbers.length % 2 === 0) {
+    return (validNumbers[mid - 1] + validNumbers[mid]) / 2; 
+  } else {
+    return validNumbers[mid];
+  }
 }
 
 function convertToNumber(dataframe, col) {
