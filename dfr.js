@@ -20,11 +20,22 @@ return [rows, cols];
 }
 
 function findTotal(dataset) {
-  
+  if (!Array.isArray(dataset) || (dataset.length > 0 && Array.isArray(dataset[0]))) {
+    return 0; 
+  }
+
+  let total = 0;
+
+  for (const item of dataset) {
+    if (validNumber(item)) {
+        total += parseFloat(item);
+    }
+}
+return total;
 }
 
 function calculateMean(dataset) {
-  
+
 }
 
 function calculateMedian(dataset) {
