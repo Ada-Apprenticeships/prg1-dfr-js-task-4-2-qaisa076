@@ -5,11 +5,10 @@ function fileExists(filename) {
 }
 
 function validNumber(value) {
-  
+  return typeof value === 'number' ? !isNaN(value) : /^-?\d+(\.\d+)?$/.test(value);
 }
 
 function dataDimensions(dataframe) {
-
 }
 
 function findTotal(dataset) {
