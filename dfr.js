@@ -35,6 +35,20 @@ return total;
 }
 
 function calculateMean(dataset) {
+  if (!Array.isArray(dataset) || (dataset.length > 0 && Array.isArray(dataset[0]))) {
+    return 0;
+  }
+
+  let total = 0;
+  let count = 0;
+
+  for (const item of dataset) {
+    if (validNumber(item)) {
+        total += parseFloat(item);
+        count++;
+    }
+  }
+  return count > 0 ? total / count : 0;
 
 }
 
