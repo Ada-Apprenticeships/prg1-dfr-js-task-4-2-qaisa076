@@ -97,10 +97,16 @@ function convertToNumber(dataframe, col) {
   return convertedCount;
 }
 function flatten(dataframe) {
+  const [rows, cols] = dataDimensions(dataframe);
+    
+  if (rows > 0 && cols === 1) {
+      return dataframe.map(row => row[0]); 
+  }
+  return [];
 }
 
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
-
+    
 }
 
 
