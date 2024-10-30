@@ -106,7 +106,35 @@ function flatten(dataframe) {
 }
 
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
+  ignoreRows = ignoreRows || [];
+  ignoreCols = ignoreCols || [];
+
+  if (!fs.existsSync(csvFile)) {
+    return [[], -1, -1];
+  }
+
+  const data = fs.readFileSync(csvFile, 'utf-8');
     
+  const rows = data.split('\n').map(function(row) {
+      return row.split(',').map(function(cell) {
+          return cell.trim();
+      });
+  });
+    
+  const totalRows = rows.length;
+  const totalCols = totalRows > 0 ? rows[0].length : 0;
+
+  const filteredRows = rows.filter(function(_, index) {
+      return !ignoreRows.includes(index);
+  });
+
+  const dataframe = filteredRows.map(function(row) {
+      return row.filter(function(_, colIndex) {
+          return !ignoreCols.includes(colIndex);
+      });
+  });
+
+  return [dataframe, totalRows, totalCols];
 }
 
 
